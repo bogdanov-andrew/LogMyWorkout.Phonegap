@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="logResultsPage">
+    <head>
+        <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <!--link href="css/bootstrap.min.css" rel="stylesheet"-->
+        <link href="css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/ion.slider/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/ion.slider/ion.rangeSlider.css" />
+		<link rel="stylesheet" type="text/css" href="css/ion.slider/ion.rangeSlider.skinHTML5.css" />
+		<link rel="stylesheet" type="text/css" href="css/logresults.css" />
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/external/ion.rangeSlider.min.js"></script>
+		<!--script type="text/javascript" src="cordova.js"></script-->
+        <script type="text/javascript" src="js/logresults.js"></script>
+		
+        <title>Hello World</title>
+    </head>
+    <body class="body" ng-controller="LogResultsPageController as logResultsController">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				  <a class="navbar-brand" href="#">Log Results</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				  <ul class="nav navbar-nav">
+					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">Link</a></li>
+				  </ul>
+				</div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</div>
+        
+		<div class="main-part">
+			<form class="form-inline">
+				  <div class="form-group">
+					<label class="sr-only" for="InputWeight">Weight</label>
+					<input type="text" class="form-control" id="InputWeight" placeholder="Weight">
+				  </div>
+				  <div class="form-group">
+					<label class="sr-only" for="InputCount">Count</label>
+					<input type="number" class="form-control" id="InputCount" placeholder="Count">
+					<div class="submit-button-area">
+						<button type="submit" class="btn btn-success btn-lg">Log it!</button>
+					</div>
+				  </div>
+			</form>
+			
+			<input id="range_44" />
+			<input id="result_44" />
+			<script>
+                                    $(document).ready(function () {
+                                        var $range = $("#range_44"),
+                                            $result = $("#result_44");
+
+                                        var track = function (data) {
+                                            delete data.input;
+                                            delete data.slider;
+                                            if (JSON) {
+                                                $result.html(JSON.stringify(data, null, 2));
+                                            } else {
+                                                $result.html(data.toString());
+                                            }
+                                        };
+
+                                        $range.ionRangeSlider({
+                                            type: "single",
+                                            min: 0,
+                                            max: 50,
+                                            from: 0,
+                                            to: 50,
+                                            step: 1,
+                                            onStart: track,
+                                            onChange: track,
+                                            onFinish: track,
+                                            onUpdate: track
+                                        });
+                                    });
+                                </script>
+		</div>
+    </body>
+</html>

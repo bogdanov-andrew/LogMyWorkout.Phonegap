@@ -1,6 +1,6 @@
 (function(){ 
-	var app = angular.module('exercisePage',[ ]);
-	app.controller('ExercisePageController', function(){
+	var app = angular.module('logResultsPage',[ ]);
+	app.controller('LogResultsPageController', function(){
 		this.trainData = exerciseList;
 		$('#myButton').on('click', function () {
 			window.location.href = "exercises.html";
@@ -9,7 +9,7 @@
 			$('#exercise-name').focus();
 		});	 
 		this.doExercise = function(number){
-			window.location.href = "logresults.html";
+		
 		};
 		this.saveExercise = function(){
 			var form = this.addExerciseForm;

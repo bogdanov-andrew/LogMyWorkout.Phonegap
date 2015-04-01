@@ -36,6 +36,15 @@
 					<span class="icon-bar"></span>
 				  </button>
 				  <a class="navbar-brand" href="#">Log Results</a>
+				  <div class="center-block">
+					  <button id="timerButton" type="button" class="btn btn-primary navbar-btn navbar-right" ng-click="logResultsController.startTimer()">
+						<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+						<span>Start Timer!</span>
+						<!--span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span-->
+					  </button>
+				  </div>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,53 +57,72 @@
 			  </div><!-- /.container-fluid -->
 			</nav>
 		</div>
-        
 		<div class="main-part">
-			<form class="form-inline">
-				  <div class="form-group">
-					<label class="sr-only" for="InputWeight">Weight</label>
-					<input type="text" class="form-control" id="InputWeight" placeholder="Weight">
-				  </div>
-				  <div class="form-group">
-					<label class="sr-only" for="InputCount">Count</label>
-					<input type="number" class="form-control" id="InputCount" placeholder="Count">
-					<div class="submit-button-area">
-						<button type="submit" class="btn btn-success btn-lg">Log it!</button>
-					</div>
-				  </div>
-			</form>
 			
-			<input id="range_44" />
-			<input id="result_44" />
-			<script>
-                                    $(document).ready(function () {
-                                        var $range = $("#range_44"),
-                                            $result = $("#result_44");
-
-                                        var track = function (data) {
-                                            delete data.input;
-                                            delete data.slider;
-                                            if (JSON) {
-                                                $result.html(JSON.stringify(data, null, 2));
-                                            } else {
-                                                $result.html(data.toString());
-                                            }
-                                        };
-
-                                        $range.ionRangeSlider({
-                                            type: "single",
-                                            min: 0,
-                                            max: 50,
-                                            from: 0,
-                                            to: 50,
-                                            step: 1,
-                                            onStart: track,
-                                            onChange: track,
-                                            onFinish: track,
-                                            onUpdate: track
-                                        });
-                                    });
-                                </script>
+			<div class="list-group">
+				  <a href data-target="#addExerciseRepetitionModal" data-toggle="modal" class="list-group-item list-group-item-success">
+					<div class="repetition-item">
+						<div class="repetition-item-left">
+							<span class="repetition-icon">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</span>
+						</div>
+						<div class="repetition-item-body">
+							<h4>Log repetition!</h4>
+						</div>
+					</div>
+				  </a>
+				  <a href ng-click="ex.doExercise(exercise.id)" class="list-group-item" ng-repeat="repetition in logResultsController.repetitionList">
+					<div class="repetition-item">
+						<div class="repetition-item-left">
+							<span class="repetition-icon">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							</span>
+						</div>
+						<div class="repetition-item-body">
+							<h4 class="list-group-item-heading">#{{repetition.id}}</h4>
+							<p class="list-group-item-text">{{repetition.weight}} - {{repetition.repetitions}}</p>
+						</div>
+					</div>
+				  </a>
+			</div>
+			
 		</div>
-    </body>
+		<div class="modal fade" id="addExerciseRepetitionModal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Results</h4>
+			  </div>
+			  <div class="modal-body">
+				<form>
+				  <div class="form-group">
+					<label for="repetition-weight" class="control-label">Weight:</label>
+					<input type="text" class="form-control" id="repetition-weight" />
+				  </div>
+				  <div class="form-group">
+					<label for="repetition-count" class="control-label">Count:</label>
+					<input type="text" class="form-control" id="repetition-count" />
+				  </div>
+				</form>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" ng-click="logResultsController.logRepetition()" class="btn btn-primary">Save!</button>
+			  </div>
+			</div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<!--nav class="navbar navbar-default navbar-fixed-bottom">
+		  <div class="container-fluid">
+			<div class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			  <strong><a href="#" class="alert-link">Undo!</a></strong>
+			</div>
+		  </div>
+		</nav-->		
+	</body>
 </html>

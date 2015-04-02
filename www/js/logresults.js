@@ -1,6 +1,6 @@
 (function(){ 
 	var app = angular.module('logResultsPage',[ ]);
-	app.controller('LogResultsPageController', function(){
+	app.controller('LogResultsPageController', ['$interval' ,function($interval){
 		this.repetitionList = repetitionList;
 		$('#myButton').on('click', function () {
 			window.location.href = "exercises.html";
@@ -12,33 +12,31 @@
 		
 		};
 		
-		function Timer(timeout){
-			this.timeout = timeout;
-			this.timerPosition = timeout;
-			
-			this.onTimer = function() {
-				$('#timerButton').button('loading');	
-				if(this.timerPostition-1 > 0){
-					this.timerPostition--;
-					$('#timerButton').button('Seconds left: ' + this.timerPostition);
+		var timer;
+		var timerPosition = 15;
+		function onTimer() {
+				console.log('working: ' + timerPosition);
+				$('#timerButton').text('Timer: ' + timerPosition + ' seconds left');
+				if(timerPosition-1 > 0){
+					timerPosition--;
+					$('#timerButton').button('Seconds left: ' + timerPosition);
 				}else{
-					clearInterval(this.timer);
-					$('#timerButton').button('reset');	
+					if(angular.isDefined(timer)){
+						$interval.cancel(timer);
+						timer = undefined;
+
+						$('#timerButton').button('reset');	
+					}
 				}
 			};
-		};
-		
-		this.timer = null;
-		
+
 		this.startTimer = function() {
-			var newTimer = new Timer(15);
-			this.timer = setInterval(
-				function() 
-				{ 
-					newTimer.onTimer(); 
-				}, 1000);
+			if(angular.isDefined(timer)){
+					return;
+			}
+			timer = $interval(onTimer,1000);
 		};
-				
+		
 		this.logRepetition = function(){
 			var weight = $('#repetition-weight').val();
 			var count = $('#repetition-count').val();
@@ -51,7 +49,7 @@
 			this.repetitionList.push(newRepetition);
 			$("#addExerciseRepetitionModal").modal("hide");
 		};
-	});
+	}]);
 	var repetitionList = 
 		 [
 			{

@@ -2,39 +2,13 @@
 	var app = angular.module('logResultsPage',[ ]);
 	app.controller('LogResultsPageController', ['$interval' ,function($interval){
 		this.repetitionList = repetitionList;
-		$('#myButton').on('click', function () {
-			window.location.href = "exercises.html";
-		  });
+		
 		$('#addExerciseRepetitionModal').on('shown.bs.modal', function(){
 			$('#repetition-weight').focus();
 		});	 
-		this.doExercise = function(number){
 		
-		};
-		
-		var timer;
-		var timerPosition = 15;
-		function onTimer() {
-				console.log('working: ' + timerPosition);
-				$('#timerButton').text('Timer: ' + timerPosition + ' seconds left');
-				if(timerPosition-1 > 0){
-					timerPosition--;
-					$('#timerButton').button('Seconds left: ' + timerPosition);
-				}else{
-					if(angular.isDefined(timer)){
-						$interval.cancel(timer);
-						timer = undefined;
-
-						$('#timerButton').button('reset');	
-					}
-				}
-			};
-
 		this.startTimer = function() {
-			if(angular.isDefined(timer)){
-					return;
-			}
-			timer = $interval(onTimer,1000);
+			window.location.href = "timerPage.html";
 		};
 		
 		this.logRepetition = function(){

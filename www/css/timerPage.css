@@ -1,0 +1,29 @@
+.body { 
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+.keypad-style {
+    border-collapse: separate; /* Способ отображения границы */ 
+    width: 100%; /* Ширина таблицы */
+    table-layout: fixed; 
+    border-spacing: 8px 8px; /* Расстояние между ячейками */ 
+ }
+
+.key-style{
+	width: 100%; 
+	line-height: 100%; 
+	font-size: 2em; 
+	text-align: center;
+}
+
+.main-part {
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 100%;
+}
+
+
+
+.btn-width{
+	width: 100%;
+}

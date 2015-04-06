@@ -51,7 +51,23 @@
 		</div>
 		<!-- <div id="button1" class="key-style">1</div> -->
 		<div class="main-part">
-			<input id="textField1" ng-model="timerPageController.keyboardValue">
+			<div class="display-numbers-block">
+				<div class="numbers-blocks">
+					<span class="label-name">Hours</span>
+					</br>
+					<a class="numbers-style" tabindex="1">00</a>
+				</div>
+				<div class="numbers-blocks">
+					<span class="label-name">Minutes</span>
+					</br>
+					<a class="numbers-style" id="minutesValue" ng-model="timerPageController.keyboardValue">00</a>
+				</div>
+				<div class="numbers-blocks">
+					<span class="label-name">Seconds</span>
+					</br>
+					<a class="numbers-style">00</a>
+				</div>
+			</div>
 			<table class="keypad-style">
 				<tr>
 					<td> <button type="button" id="button1" class="btn btn-success btn-lg btn-width" autocomplete="off">1</button>  </td>

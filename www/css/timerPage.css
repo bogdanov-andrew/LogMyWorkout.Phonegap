@@ -2,6 +2,7 @@
 	padding-top: 70px;
 	padding-bottom: 70px;
 }
+
 .keypad-style {
     border-collapse: separate; /* Способ отображения границы */ 
     width: 100%; /* Ширина таблицы */
@@ -22,6 +23,24 @@
 	height: 100%;
 }
 
+.display-numbers-block {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.numbers-blocks {
+	display: inline-block;
+}
+
+.label-name{
+	font-size: 1.5em;
+}
+
+.numbers-style {
+	font-size: 4.5em;
+	
+}
 
 
 .btn-width{

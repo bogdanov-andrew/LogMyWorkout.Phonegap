@@ -63,8 +63,14 @@
 			timer = $interval(onTimer,1000);
 		};
 		
+		var element;
+		$('a').click(function() {
+			element = this;  // 'this' is a reference to the element that triggered the click
+			$scope.keyboardValue = '';
+		});
+		
 		function updateValue(){
-			$('#textField1').val($scope.keyboardValue);
+			$(element).text($scope.keyboardValue);
 		}
 
 		$scope.keyPressedF = function(key){

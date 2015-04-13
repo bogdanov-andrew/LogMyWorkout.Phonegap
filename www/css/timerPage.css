@@ -39,10 +39,30 @@
 
 .numbers-style {
 	font-size: 4.5em;
-	
 }
-
 
 .btn-width{
 	width: 100%;
+}
+
+.stop-restart-area{
+	display: inline;
+}
+
+.start-area {
+    margin-bottom: 5px;
+}
+
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.timer-buttons-area {
+	width: 70%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

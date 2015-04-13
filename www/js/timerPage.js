@@ -85,11 +85,20 @@
 					case 8:
 					case 9:
 					case 0:				
-						var result = $scope.keyboardValue.concat(key.toString());
-						$scope.keyboardValue = result;
+						if($scope.keyboardValue.length == 0){
+                            $scope.keyboardValue = '00';
+                        }
+                        var result = $scope.keyboardValue.concat(key.toString());
+						while(result.length > 2){
+                            result = result.substring(1,result.length);
+                        }
+                        $scope.keyboardValue = result;
 						break;
 					case "DEL":
 						var result = $scope.keyboardValue.substring(0,$scope.keyboardValue.length-1);
+						if(result.length < 2){
+                            result = "00";
+                        }
 						$scope.keyboardValue = result;
 						break;
 					case "DOT":

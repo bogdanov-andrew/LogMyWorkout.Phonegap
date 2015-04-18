@@ -2,7 +2,17 @@
 	var app = angular.module('TimerPage',[ ]);
 	app.controller('TimerPageController', ['$interval', '$scope' ,function($interval, $scope){
 		$scope.keyboardValue = "";
-		
+
+        function disableControl(controlName){
+            $(controlName).fadeTo('fast',0.3);
+        };
+
+        function enableControl(controlName){
+            $(controlName).fadeTo('fast',1);
+        };
+
+        disableControl('#buttonRestart');
+
 		$('#button1').on('touchend',function(){
 			$scope.keyPressedF(1);
 		});
@@ -39,29 +49,115 @@
 		$('#buttonDEL').on('touchend',function(){
 			$scope.keyPressedF('DEL');
 		});
-		
-		var timer;
-		var timerPosition = 15;
-		function onTimer() {
-				console.log('working: ' + timerPosition);
-				<!-- change UI into time show -->
-				if(timerPosition-1 > 0){
-					timerPosition--;
-				}else{
-					if(angular.isDefined(timer)){
-						$interval.cancel(timer);
-						timer = undefined;
-						<!-- hide timer, change UI on timer stop -->
-					}
-				}
-			};
 
-		this.startTimer = function() {
-			if(angular.isDefined(timer)){
-					return;
+        var timer;
+        var timerConstValue = 0;
+        var timerPosition = timerConstValue;
+        function convertFullTimeToSeconds(hours, minutes, seconds){
+            var resultSeconds = seconds * 1.0;
+            resultSeconds += minutes * 1.0 * 60;
+            resultSeconds += hours * 1.0 * 60 * 60;
+
+            return resultSeconds;
+        }
+
+        function stopTimer(){
+           if(angular.isDefined(timer)){
+				$interval.cancel(timer);
+				timer = undefined;
+				<!-- hide timer, change UI on timer stop -->
+           }
+           timerPosition = timerConstValue;
+
+            $('#buttonStartStop').text('Start');
+            $('#buttonStartStop').removeClass('btn-danger');
+            $('#buttonStartStop').addClass('btn-primary');
+
+            enableControl('#keypad');
+            disableControl('#buttonRestart');
+        };
+
+        function startTimer() {
+            if(angular.isDefined(timer)){
+                return;
+            }
+
+            var hours = $('#hoursValue').text();
+            var minutes = $('#minutesValue').text();
+            var seconds = $('#secondsValue').text();
+
+            timerPosition = convertFullTimeToSeconds(hours, minutes, seconds);
+            timerConstValue = timerPosition;
+
+            timer = $interval(onTimer,1000);
+
+            $('#buttonStartStop').text('Stop');
+            $('#buttonStartStop').removeClass('btn-primary');
+            $('#buttonStartStop').addClass('btn-danger');
+
+            enableControl('#buttonRestart');
+            disableControl('#keypad');
+        };
+
+		function onTimer() {
+			console.log('working: ' + timerPosition);
+			updateTime(timerPosition);
+
+			if(timerPosition-1 >= -1){
+				timerPosition--;
+			}else{
+				stopTimer();
+				updateTime(timerPosition);
 			}
-			timer = $interval(onTimer,1000);
 		};
+
+        function updateTimeValues(hours, minutes, seconds){
+            $('#hoursValue').text(NormalizeNumbers(hours));
+            $('#minutesValue').text(NormalizeNumbers(minutes));
+            $('#secondsValue').text(NormalizeNumbers(seconds));
+        };
+
+        function NormalizeNumbers(number){
+            var result = number.toString();
+            while(result.length < 2){
+                result = '0' + result;
+            }
+            return result;
+        }
+
+		function updateTime(seconds){
+            if(seconds < 60){
+                updateTimeValues(0,0,seconds);
+                return;
+            }
+
+            var minutes = seconds / 60;
+            var hours = 0;
+            if(minutes > 0){
+                seconds = seconds % 60;
+                minutes = Math.floor(minutes);
+				hours = minutes / 60;
+                if(hours > 0){
+                    hours = Math.floor(hours);
+                    minutes = minutes % 60;
+					
+                    if(hours > 99){
+                        hours = 99;
+                    }
+                }
+            }
+
+            updateTimeValues(hours,minutes,seconds);
+		};
+
+        $('#buttonStartStop').on('touchend', function(){
+            if(!angular.isDefined(timer)){
+                startTimer();
+                return;
+            }
+
+            stopTimer();
+        });
 		
 		var element;
 		$('a').click(function() {
@@ -69,7 +165,7 @@
 			$scope.keyboardValue = '';
 		});
 		
-		function updateValue(){
+		function updateKeyboardValue(){
 			$(element).text($scope.keyboardValue);
 		}
 
@@ -112,7 +208,7 @@
 						break;
 			}
 
-			updateValue();
+            updateKeyboardValue();
 		}
 
 		this.keyPressed = function(key) {

@@ -55,45 +55,44 @@
 				<div class="numbers-blocks">
 					<span class="label-name">Hours</span>
 					</br>
-					<a class="numbers-style" tabindex="1">00</a>
+					<a class="numbers-style" id="hoursValue" tabindex="1">00</a>
 				</div>
 				<div class="numbers-blocks">
 					<span class="label-name">Minutes</span>
 					</br>
-					<a class="numbers-style" id="minutesValue" ng-model="timerPageController.keyboardValue">00</a>
+					<a class="numbers-style" id="minutesValue">00</a>
 				</div>
 				<div class="numbers-blocks">
 					<span class="label-name">Seconds</span>
 					</br>
-					<a class="numbers-style">00</a>
+					<a class="numbers-style" id="secondsValue">00</a>
 				</div>
 			</div>
-			<table class="keypad-style">
+			<table class="keypad-style" id="keypad">
 				<tr>
-					<td> <button type="button" id="button1" class="btn btn-success btn-lg btn-width" autocomplete="off">1</button>  </td>
-					<td> <button type="button" id="button2" class="btn btn-success btn-lg btn-width" autocomplete="off">2</button> </td>
-					<td> <button type="button" id="button3" class="btn btn-success btn-lg btn-width" autocomplete="off">3</button> </td>
+					<td> <button type="button" id="button1" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">1</button>  </td>
+					<td> <button type="button" id="button2" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">2</button> </td>
+					<td> <button type="button" id="button3" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">3</button> </td>
 				</tr>
 				<tr>
-					<td> <button type="button" id="button4" class="btn btn-success btn-lg btn-width" autocomplete="off">4</button> </td>
-					<td> <button type="button" id="button5" class="btn btn-success btn-lg btn-width" autocomplete="off">5</button> </td>
-					<td> <button type="button" id="button6" class="btn btn-success btn-lg btn-width" autocomplete="off">6</button> </td>
+					<td> <button type="button" id="button4" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">4</button> </td>
+					<td> <button type="button" id="button5" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">5</button> </td>
+					<td> <button type="button" id="button6" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">6</button> </td>
 				</tr>
 				<tr>
-					<td> <button type="button" id="button7" class="btn btn-success btn-lg btn-width" autocomplete="off">7</button> </td>
-					<td> <button type="button" id="button8" class="btn btn-success btn-lg btn-width" autocomplete="off">8</button> </td>
-					<td> <button type="button" id="button9" class="btn btn-success btn-lg btn-width" autocomplete="off">9</button> </td>
+					<td> <button type="button" id="button7" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">7</button> </td>
+					<td> <button type="button" id="button8" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">8</button> </td>
+					<td> <button type="button" id="button9" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">9</button> </td>
 				</tr>
 				<tr>
-					<td> <button type="button" id="buttonDOT" class="btn btn-disabled btn-lg btn-width" autocomplete="off">.</button> </td>
-					<td> <button type="button" id="button0" class="btn btn-success btn-lg btn-width" autocomplete="off">0</button> </td>
-					<td> <button type="button" id="buttonDEL" class="btn btn-disabled btn-lg btn-width" autocomplete="off">DEL</button> </td>
+					<td> <button type="button" id="buttonDOT" class="btn btn-disabled btn-lg keypad-btn-width" autocomplete="off">.</button> </td>
+					<td> <button type="button" id="button0" class="btn btn-default btn-lg keypad-btn-width" autocomplete="off">0</button> </td>
+					<td> <button type="button" id="buttonDEL" class="btn btn-disabled btn-lg keypad-btn-width" autocomplete="off">DEL</button> </td>
 				</tr>
 			</table>
-			<div class="timer-buttons-area center-block">
-					<button type="button" id="buttonStart" class="btn btn-primary btn-lg btn-width" autocomplete="off">Start</button>
-					<button type="button" id="buttonStop" class="btn btn-default btn-lg btn-width" autocomplete="off">Stop</button>
-					<button type="button" id="buttonRestart" class="btn btn-default btn-lg btn-width" autocomplete="off">Reset</button>
+			<div class="timer-buttons-area">
+					<button type="button" id="buttonStartStop" class="btn btn-success btn-lg start-stop-buttons" autocomplete="off">Start</button>
+					<button type="button" id="buttonRestart" class="btn btn-default btn-lg start-stop-buttons" autocomplete="off">Reset</button>
 			</div>
 		</div>
 				

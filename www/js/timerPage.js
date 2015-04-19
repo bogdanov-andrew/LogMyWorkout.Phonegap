@@ -2,7 +2,6 @@
 	var app = angular.module('TimerPage',[ ]);
 	app.controller('TimerPageController', ['$interval', '$scope' ,function($interval, $scope){
 		$scope.keyboardValue = "";
-
         function disableControl(controlName){
             $(controlName).fadeTo('fast',0.3);
         };
@@ -75,6 +74,7 @@
 
             enableControl('#keypad');
             disableControl('#buttonRestart');
+            $(".keypad-btn-width").attr('disabled', false);
         };
 
         function startTimer() {
@@ -97,6 +97,7 @@
 
             enableControl('#buttonRestart');
             disableControl('#keypad');
+            $(".keypad-btn-width").attr('disabled', true);
         };
 
 		function onTimer() {

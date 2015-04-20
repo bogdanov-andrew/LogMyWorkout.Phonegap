@@ -50,8 +50,8 @@
 		});
 
         var timer;
-        var timerConstValue = 0;
-        var timerPosition = timerConstValue;
+        var timerInitialValue = 0;
+        var timerPosition = timerInitialValue;
         function convertFullTimeToSeconds(hours, minutes, seconds){
             var resultSeconds = seconds * 1.0;
             resultSeconds += minutes * 1.0 * 60;
@@ -66,7 +66,7 @@
 				timer = undefined;
 				<!-- hide timer, change UI on timer stop -->
            }
-           timerPosition = timerConstValue;
+           timerPosition = timerInitialValue;
 
             $('#buttonStartStop').text('Start');
             $('#buttonStartStop').removeClass('btn-danger');
@@ -87,7 +87,7 @@
             var seconds = $('#secondsValue').text();
 
             timerPosition = convertFullTimeToSeconds(hours, minutes, seconds);
-            timerConstValue = timerPosition;
+            timerInitialValue = timerPosition;
 
             timer = $interval(onTimer,1000);
 
@@ -160,6 +160,24 @@
             stopTimer();
         });
 		
+		$('#buttonRestart').on('touchend', function(){
+            ResetScreen();
+		});
+
+        $('#buttonSkip').on('touchend',function(){
+            timerInitialValue = 0;
+            ResetScreen();
+            //todo navigate back
+        });
+
+        function ResetScreen(){
+            if(angular.isDefined(timer)){
+                stopTimer();
+            }
+            $scope.keyboardValue = '';
+            updateTimeValues(0,0,0);
+        };
+
 		var element;
 		$('a').click(function() {
 			element = this;  // 'this' is a reference to the element that triggered the click
@@ -216,7 +234,7 @@
 			keyPressedF(key);
 		}
 	}]);
-	app.directive('numericKeboard' ,function(){
+	app.directive('numericKeyboard' ,function(){
 		return {
 			restrict: 'E',
 			templateUrl: 'numerickeyboard.html',

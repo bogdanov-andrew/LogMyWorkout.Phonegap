@@ -1,6 +1,6 @@
 (function(){ 
-	var app = angular.module('startPage',[ ]);
-	app.controller('StartPageController', function(){
+	var app = angular.module('startPage', [ 'dataAccessModule' ]);
+	app.controller('StartPageController', function($scope, dataAccess){
 
 		if( window.cordova ) {
 			document.addEventListener( 'deviceready', start, false );
@@ -9,10 +9,11 @@
 		}
 
 		function start() {
-			// Здесь начинается JS-логика нашего приложения
-			console.log('Init!');
+			// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ JS-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			//dataAccess.initDb();
+			//dataAccess.createScheme();
 
-			var db = window.openDatabase("TestDB","1.0", "Demo", -1);
+			/*var db = window.openDatabase("TestDB","1.0", "Demo", -1);
 
 			db.transaction(function(tx) {
 				tx.executeSql('DROP TABLE IF EXISTS test_table');
@@ -31,7 +32,7 @@
 					console.log("res.rows.length: " + res.rows.length + " -- should be 1");
 					console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
 				});
-			});
+			});*/
 		}
 
 		this.trainData = exerciseList;

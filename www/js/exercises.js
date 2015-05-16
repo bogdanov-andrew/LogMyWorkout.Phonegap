@@ -1,6 +1,6 @@
-(function(){ 
-	var app = angular.module('exercisePage',[ ]);
-	app.controller('ExercisePageController', function(){
+//(function(){
+	var app = angular.module('exercisePage',[ 'dataAccessModule' ]);
+	app.controller('ExercisePageController', function($scope, dataAccess){
 		this.trainData = exerciseList;
 		$('#myButton').on('click', function () {
 			window.location.href = "exercises.html";
@@ -18,8 +18,10 @@
 			var newExercise = {
 				description: descriptionVal,
 				name: nameVal,
-				number: 0
+				number: 0,
+				type: 1
 			};
+			//dataAccess.addExercise(newExercise);
 			this.trainData.push(newExercise);
 			$("#addExerciseModal").modal("hide");
 		}
@@ -37,4 +39,4 @@
 				description: '10-12-13'
 			}
 		];
-})();
+//})();

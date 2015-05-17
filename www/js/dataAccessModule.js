@@ -33,24 +33,31 @@ angular.module('dataAccessModule',[ ])
         },
         addExercise: function(exercise){
             db.transaction(function (tx) {
-                tx.executeSql("INSERT INTO ExerciseDescription (exerciseDescriptionId, name, exerciseTypeId) VALUES (?,?)", [exercise.name, exercise.type]);
+                tx.executeSql("INSERT INTO ExerciseDescription (name, exerciseTypeId) VALUES (?,?)", [exercise.name, exercise.type]);
             });
         },
-        getExercises: function(){
-            db.transaction(function(tx) {
-                var results = {};
-                tx.executeSql("select * from ExerciseDescription;", [], function(tx, res) {
-                    res.forEach(function(object, index){
-                        var element = {
-                            id: object.item(index).exerciseDescriptionId,
-                            name: object.item(index).name,
-                            type: object.item(index).exerciseTypeId
+        getExercises: function(callback){
+            db.transaction(function (tx) {
+                tx.executeSql("select * from ExerciseDescription", [], function(tx, res) {
+                    var results = [];
+                    var len = res.rows.length;
+                    if(len > 0){
+                        for(i = 0; i < len; i++){
+                            var element = {
+                                id: res.rows.item(i)['exerciseDescriptionId'],
+                                name: res.rows.item(i)['name'],
+                                type: res.rows.item(i)['exerciseTypeId'],
+                                description: ''
+                            }
+                            console.log(element.name);
+                            results.push(element);
                         }
-                    });
-                    result.push(element);
-                    //console.log("res.rows.length: " + res.rows.length + " -- should be 1");
-                    //console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
+                    }
+                    callback(results);
                 });
             });
         }
+    })
+    .run(function(){
+        db = window.openDatabase("LogMyWorkoutDB", "1.0", "Demo", -1);
     })

@@ -9,9 +9,9 @@
 		}
 
 		function start() {
-			dataAccess.initDb();
+			//dataAccess.initDb();
 			dataAccess.createScheme();
-			dataAccess.initTables();
+			//dataAccess.initTables();
 
 			/*var db = window.openDatabase("TestDB","1.0", "Demo", -1);
 

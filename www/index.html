@@ -38,11 +38,11 @@
 			</nav>
 			<div class="top-part">
 				<span class="done-text">Previously Done</span>
-				<span class="date-text">{{st.trainData.lastTrain | date:'dd MMMM yyyy'}}</span>
+				<span class="date-text">{{trainData.lastTrain | date:'dd MMMM yyyy'}}</span>
 			</div>
 			<div class="exercise-list">
 				<div class="list-group">
-				  <a href="#" class="list-group-item" ng-repeat="exercise in st.trainData.exercises">
+				  <a href="#" class="list-group-item" ng-repeat="exercise in trainData.exercises">
 					<div class="exercise-item">
 						<div class="exercise-item-left">
 							<span class="exercise-number">{{exercise.number}}</span>
@@ -66,5 +66,6 @@
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/dataAccessModule.js"></script>
+        <script type="text/javascript" src="js/trainingInfoService.js"></script>
     </body>
 </html>

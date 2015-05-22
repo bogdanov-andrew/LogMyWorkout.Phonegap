@@ -1,5 +1,5 @@
-var app = angular.module('exercisePage',[ 'dataAccessModule' ]);
-app.controller('ExercisePageController', function($scope, dataAccess){
+var app = angular.module('exercisePage',[ 'dataAccessModule', 'trainingInfoModule' ]);
+app.controller('ExercisePageController', function($scope, dataAccess, trainingInfoService){
     $scope.exercises = [];
     this.exerciseListLoaded = function(data){
         console.log(data.length);
@@ -12,7 +12,9 @@ app.controller('ExercisePageController', function($scope, dataAccess){
     };
 
     this.loadExercises();
-
+    console.log(trainingInfoService.getTrainingId());
+    trainingInfoService.setTrainingId(555);
+    console.log(trainingInfoService.getTrainingId());
     $('#myButton').on('click', function () {
         window.location.href = "exercises.html";
       });

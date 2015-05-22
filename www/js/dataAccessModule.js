@@ -56,6 +56,35 @@ angular.module('dataAccessModule',[ ])
                     callback(results);
                 });
             });
+        },
+        getLastTrainInformation: function(callback){
+            var exerciseList = {
+                lastTrain: '2015-03-15',
+                exercises: [
+                    {
+                        number: 1,
+                        name: 'Pop up',
+                        result: '10-12-13'
+                    },
+                    {
+                        number: 2,
+                        name: 'Push up',
+                        result: '10-12-13'
+                    },
+                    {
+                        number: 3,
+                        name: 'Hyperextensy',
+                        result: '10-12-13'
+                    },
+                    {
+                        number: 4,
+                        name: 'Push up',
+                        result: '10-12-13'
+                    }
+                ]
+            };
+
+            callback(exerciseList);
         }
     })
     .run(function(){

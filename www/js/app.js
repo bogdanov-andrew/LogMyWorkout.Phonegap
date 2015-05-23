@@ -1,5 +1,5 @@
 (function(){ 
-	var app = angular.module('startPage', ['ngRoute','exercisePage', 'dataAccessModule', 'trainingInfoModule' ]);
+	var app = angular.module('startPage', ['ngRoute','exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule' ]);
 	app.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
@@ -10,7 +10,11 @@
                 when('/exercises', {
 					templateUrl: 'exercises.html',
 					controller: 'ExercisePageController'
-				});
+				}).
+                when('/logresults', {
+                    templateUrl: 'logresults.html',
+                    controller: 'LogResultsPageController'
+                });
 				//when('/phones/:phoneId', {
 				//	templateUrl: 'partials/phone-detail.html',
 				//	controller: 'PhoneDetailCtrl'

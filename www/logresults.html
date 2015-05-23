@@ -1,127 +1,62 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="logResultsPage">
-    <head>
-        <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-		<meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <!--link href="css/bootstrap.min.css" rel="stylesheet"-->
-        <link href="css/bootstrap.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/ion.slider/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/ion.slider/ion.rangeSlider.css" />
-		<link rel="stylesheet" type="text/css" href="css/ion.slider/ion.rangeSlider.skinHTML5.css" />
-		<link rel="stylesheet" type="text/css" href="css/logresults.css" />
-		
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/angular.min.js"></script>
-		<script src="js/external/ion.rangeSlider.min.js"></script>
-		<!--script type="text/javascript" src="cordova.js"></script-->
-        <script type="text/javascript" src="js/logresults.js"></script>
-		
-        <title>Hello World</title>
-    </head>
-    <body class="body" ng-controller="LogResultsPageController as logResultsController">
-		<div class="container">
-			<nav class="navbar navbar-default navbar-fixed-top">
-			  <div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				  </button>
-				  <a class="navbar-brand" href="#">Log Results</a>
-				  <div class="center-block">
-					  <button id="timerButton" type="button" class="btn btn-primary navbar-btn navbar-right" ng-click="logResultsController.startTimer()">
-						<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-						<span>Start Timer!</span>
-						<!--span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span-->
-					  </button>
-				  </div>
+<div class="main-part">
+    <button id="timerButton" type="button" class="btn btn-primary navbar-btn navbar-right" ng-click="startTimer()">
+        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+        <span>Start Timer!</span>
+        <!--span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span-->
+    </button>
+    <div class="list-group">
+		  <a href data-target="#addExerciseRepetitionModal" data-toggle="modal" class="list-group-item list-group-item-success">
+			<div class="repetition-item">
+				<div class="repetition-item-left">
+					<span class="repetition-icon">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</span>
 				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				  <ul class="nav navbar-nav">
-					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">Link</a></li>
-				  </ul>
-				</div><!-- /.navbar-collapse -->
-			  </div><!-- /.container-fluid -->
-			</nav>
-		</div>
-		<div class="main-part">
-			<div class="list-group">
-				  <a href data-target="#addExerciseRepetitionModal" data-toggle="modal" class="list-group-item list-group-item-success">
-					<div class="repetition-item">
-						<div class="repetition-item-left">
-							<span class="repetition-icon">
-								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-							</span>
-						</div>
-						<div class="repetition-item-body">
-							<h4>Log repetition!</h4>
-						</div>
-					</div>
-				  </a>
-				  <a href ng-click="ex.doExercise(exercise.id)" class="list-group-item" ng-repeat="repetition in logResultsController.repetitionList">
-					<div class="repetition-item">
-						<div class="repetition-item-left">
-							<span class="repetition-icon">
-								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-							</span>
-						</div>
-						<div class="repetition-item-body">
-							<h4 class="list-group-item-heading">#{{repetition.id}}</h4>
-							<p class="list-group-item-text">{{repetition.weight}} - {{repetition.repetitions}}</p>
-						</div>
-					</div>
-				  </a>
+				<div class="repetition-item-body">
+					<h4>Log repetition!</h4>
+				</div>
 			</div>
-			
-		</div>
-		<div class="modal fade" id="addExerciseRepetitionModal">
-		  <div class="modal-dialog">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Results</h4>
-			  </div>
-			  <div class="modal-body">
-				<form>
-				  <div class="form-group">
-					<label for="repetition-weight" class="control-label">Weight:</label>
-					<input type="text" class="form-control" id="repetition-weight" />
-				  </div>
-				  <div class="form-group">
-					<label for="repetition-count" class="control-label">Count:</label>
-					<input type="text" class="form-control" id="repetition-count" />
-				  </div>
-				</form>
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" ng-click="logResultsController.logRepetition()" class="btn btn-primary">Save!</button>
-			  </div>
-			</div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-		
-		<!--nav class="navbar navbar-default navbar-fixed-bottom">
-		  <div class="container-fluid">
-			<div class="alert alert-success alert-dismissible" role="alert">
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-			  <strong><a href="#" class="alert-link">Undo!</a></strong>
+		  </a>
+		  <a href ng-click="doExercise(exercise.id)" class="list-group-item" ng-repeat="repetition in repetitionList">
+			<div class="repetition-item">
+				<div class="repetition-item-left">
+					<span class="repetition-icon">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					</span>
+				</div>
+				<div class="repetition-item-body">
+					<h4 class="list-group-item-heading">#{{repetition.id}}</h4>
+					<p class="list-group-item-text">{{repetition.weight}} - {{repetition.repetitions}}</p>
+				</div>
 			</div>
+		  </a>
+	</div>
+</div>
+<div class="modal fade" id="addExerciseRepetitionModal">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Results</h4>
+	  </div>
+	  <div class="modal-body">
+		<form>
+		  <div class="form-group">
+			<label for="repetition-weight" class="control-label">Weight:</label>
+			<input type="text" class="form-control" id="repetition-weight" />
 		  </div>
-		</nav-->		
-	</body>
-</html>
+		  <div class="form-group">
+			<label for="repetition-count" class="control-label">Count:</label>
+			<input type="text" class="form-control" id="repetition-count" />
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="submit" ng-click="logRepetition()" class="btn btn-primary">Save!</button>
+	  </div>
+	</div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

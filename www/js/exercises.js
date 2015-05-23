@@ -1,5 +1,5 @@
 var app = angular.module('exercisePage',[ 'dataAccessModule', 'trainingInfoModule' ]);
-app.controller('ExercisePageController', function($scope, dataAccess, trainingInfoService){
+app.controller('ExercisePageController', function($scope, $location, dataAccess, trainingInfoService){
     $scope.exercises = [];
     $scope.exerciseListLoaded = function(data){
         console.log(data.length);
@@ -13,16 +13,15 @@ app.controller('ExercisePageController', function($scope, dataAccess, trainingIn
 
     $scope.loadExercises();
     console.log(trainingInfoService.getTrainingId());
-    //trainingInfoService.setTrainingId(555);
-    //console.log(trainingInfoService.getTrainingId());
+
     $('#myButton').on('click', function () {
-        window.location.href = "exercises.html";
+        $location.path('/exercises');
       });
     $('#addExerciseModal').on('shown.bs.modal', function(){
         $('#exercise-name').focus();
     });
     $scope.doExercise = function(number){
-        window.location.href = "logresults.html";
+        $location.path('/logresults');
     };
     $scope.saveExercise = function(){
         var form = this.addExerciseForm;

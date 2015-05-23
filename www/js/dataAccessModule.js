@@ -85,6 +85,45 @@ angular.module('dataAccessModule',[ ])
             };
 
             callback(exerciseList);
+        },
+        getDoneRepetitions: function(callback){
+            var repetitionList =
+                [
+                    {
+                        id: 1,
+                        exerciseId: 1,
+                        weight: 50,
+                        repetitions: 10
+                    },
+                    {
+                        id: 2,
+                        exerciseId: 1,
+                        weight: 52,
+                        repetitions: 15
+                    },
+                    {
+                        id: 3,
+                        exerciseId: 1,
+                        weight: 53,
+                        repetitions: 9
+                    },
+                    {
+                        id: 4,
+                        exerciseId: 1,
+                        weight: 55,
+                        repetitions: 7
+                    },
+                    {
+                        id: 4,
+                        exerciseId: 1,
+                        weight: 55,
+                        repetitions: 7
+                    }
+                ];
+            callback(repetitionList);
+        },
+        saveDoneRepetitions: function(data){
+
         }
     })
     .run(function(){

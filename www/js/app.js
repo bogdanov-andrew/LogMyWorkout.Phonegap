@@ -1,6 +1,6 @@
 (function(){ 
 	var app = angular.module('startPage', [ 'dataAccessModule', 'trainingInfoModule' ]);
-	app.controller('StartPageController', function($scope, dataAccess, trainingInfoService){
+	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService){
 
 		$scope.trainData = {};
 
@@ -26,6 +26,7 @@
 
 		$('#myButton').on('click', function () {
 			trainingInfoService.setTrainingId(123);
+			//$location.url('/exercises.html');
 			window.location.href = "exercises.html";
 		  });
 	});

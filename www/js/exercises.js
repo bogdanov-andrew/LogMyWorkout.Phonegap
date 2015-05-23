@@ -13,8 +13,8 @@ app.controller('ExercisePageController', function($scope, dataAccess, trainingIn
 
     this.loadExercises();
     console.log(trainingInfoService.getTrainingId());
-    trainingInfoService.setTrainingId(555);
-    console.log(trainingInfoService.getTrainingId());
+    //trainingInfoService.setTrainingId(555);
+    //console.log(trainingInfoService.getTrainingId());
     $('#myButton').on('click', function () {
         window.location.href = "exercises.html";
       });

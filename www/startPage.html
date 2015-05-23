@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="top-part">
+        <span class="done-text">Previously Done</span>
+        <span class="date-text">{{trainData.lastTrain | date:'dd MMMM yyyy'}}</span>
+    </div>
+    <div class="exercise-list">
+        <div class="list-group">
+            <a href="#" class="list-group-item" ng-repeat="exercise in trainData.exercises">
+                <div class="exercise-item">
+                    <div class="exercise-item-left">
+                        <span class="exercise-number">{{exercise.number}}</span>
+                    </div>
+                    <div class="exercise-item-body">
+                        <h4 class="list-group-item-heading">{{exercise.name}}</h4>
+                        <p class="list-group-item-text">{{exercise.result}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="exercise-bottom">
+        <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-success btn-lg" autocomplete="off">Let's train!</button>
+    </div>
+</div>

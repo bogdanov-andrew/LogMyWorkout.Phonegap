@@ -1,5 +1,24 @@
 (function(){ 
-	var app = angular.module('startPage', [ 'dataAccessModule', 'trainingInfoModule' ]);
+	var app = angular.module('startPage', ['ngRoute','exercisePage', 'dataAccessModule', 'trainingInfoModule' ]);
+	app.config(['$routeProvider',
+		function($routeProvider) {
+			$routeProvider.
+                when('/', {
+                    templateUrl: 'startPage.html',
+                    controller: 'StartPageController'
+                }).
+                when('/exercises', {
+					templateUrl: 'exercises.html',
+					controller: 'ExercisePageController'
+				});
+				//when('/phones/:phoneId', {
+				//	templateUrl: 'partials/phone-detail.html',
+				//	controller: 'PhoneDetailCtrl'
+				//}).
+				//otherwise({
+				//	redirectTo: '/phones'
+				//});
+		}]);
 	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService){
 
 		$scope.trainData = {};
@@ -26,9 +45,10 @@
 
 		$('#myButton').on('click', function () {
 			trainingInfoService.setTrainingId(123);
-			//$location.url('/exercises.html');
-			window.location.href = "exercises.html";
+			$location.path('/exercises');
+            $scope.$apply();
 		  });
 	});
+
 
 })();

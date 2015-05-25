@@ -1,5 +1,5 @@
 (function(){ 
-	var app = angular.module('startPage', ['ngRoute','exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule' ]);
+	var app = angular.module('startPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage' ]);
 	app.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
@@ -14,14 +14,14 @@
                 when('/logresults', {
                     templateUrl: 'logresults.html',
                     controller: 'LogResultsPageController'
-                });
-				//when('/phones/:phoneId', {
-				//	templateUrl: 'partials/phone-detail.html',
-				//	controller: 'PhoneDetailCtrl'
-				//}).
-				//otherwise({
-				//	redirectTo: '/phones'
-				//});
+                }).
+                when('/timer', {
+                    templateUrl: 'timerPage.html',
+                    controller: 'TimerPageController'
+                }).
+				otherwise({
+					redirectTo: '/'
+				});
 		}]);
 	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService){
 

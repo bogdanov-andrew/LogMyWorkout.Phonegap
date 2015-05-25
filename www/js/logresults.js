@@ -1,5 +1,5 @@
 var app = angular.module('logResultsPage',[ 'dataAccessModule' ]);
-app.controller('LogResultsPageController', function($interval, $scope, dataAccess){
+app.controller('LogResultsPageController', function($interval, $location, $scope, dataAccess){
 	$scope.repetitionList = [];
 
     $scope.repetitionsLoaded = function(data){
@@ -18,7 +18,7 @@ app.controller('LogResultsPageController', function($interval, $scope, dataAcces
 	});
 
 	$scope.startTimer = function() {
-		window.location.href = "timerPage.html";
+        $location.path('/timer');
 	};
 
 	$scope.logRepetition = function(){

@@ -14,7 +14,8 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseDescription (exerciseDescriptionId integer primary key, name text, exerciseTypeId integer, foreign key(exerciseTypeId) references ExerciseType(exerciseTypeId))');
             });
             db.transaction(function (tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS Training (trainingId integer primary key, startTime text, endTime text)');
+                tx.executeSql('DROP TABLE IF EXISTS Training');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Training (trainingId blob primary key, startTime text, endTime text)');
             });
             db.transaction(function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Exercise (exerciseId integer primary key, trainingId integer, exerciseDescriptionId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseDescriptionId) references ExerciseDescription(exerciseDescriptionId))');
@@ -24,11 +25,39 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Sets (setId integer primary key, exerciseId integer, value real, repetitions integer, foreign key(exerciseId) references Exercise(exerciseId))');
             });
         },
-        initTables: function() {
-            db.transaction(function (tx) {
+        initExerciseTypes: function(){
+            db.transaction(function(tx){
                 console.log('initTables');
                 tx.executeSql("INSERT INTO ExerciseType (exerciseTypeId, name, unit) VALUES (?,?,?)", [1,"Repetitions", "rep"]);
                 tx.executeSql("INSERT INTO ExerciseType (exerciseTypeId, name, unit) VALUES (?,?,?)", [2,"Weight + Repetitions", "kg * rep"]);
+            });
+        },
+        getExerciseTypes: function(callback){
+            db.transaction(function(tx){
+                    tx.executeSql("select * from ExerciseType", [], function(tx, res) {
+                        var results = [];
+                        var len = res.rows.length;
+                        if (len > 0) {
+                            for (i = 0; i < len; i++) {
+                                var element = {
+                                    id: res.rows.item(i)['exerciseTypeId'],
+                                    name: res.rows.item(i)['name']
+                                }
+                                results.push(element);
+                            }
+                        }
+                        callback(results);
+                    });
+            });
+        },
+        startTraining: function(trainingInfo){
+            db.transaction(function(tx){
+                tx.executeSql("INSERT INTO Training (trainingId, startTime) VALUES (?,?)", [trainingInfo.id, trainingInfo.startTime.toISOString()]);
+            });
+        },
+        endTraining: function(trainingInfo){
+            db.transaction(function(tx){
+                tx.executeSql("UPDATE Training SET endTime = ? WHERE trainingId = ?", [trainingInfo.endTime.toISOString(), trainingInfo.id]);
             });
         },
         addExercise: function(exercise){

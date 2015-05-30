@@ -47,11 +47,30 @@
 
 		dataAccess.getLastTrainInformation(this.exerciseInformationLoaded);
 
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
+
 		$('#myButton').on('click', function () {
-			trainingInfoService.setTrainingId(123);
-			$location.path('/exercises');
+			trainingInfo = {
+                id: guid(),
+                startTime: new Date(),
+                endTime: new Date()
+            }
+
+            dataAccess.startTraining(trainingInfo);
+            trainingInfoService.setTrainingId(trainingInfo.id);
+
+            $location.path('/exercises');
             $scope.$apply();
 		  });
+
 	});
 
 

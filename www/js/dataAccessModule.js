@@ -7,22 +7,24 @@ angular.module('dataAccessModule',[ ])
         },
         createScheme: function () {
             db.transaction(function (tx) {
-                    tx.executeSql('DROP TABLE IF EXISTS ExerciseType');
+                    //tx.executeSql('DROP TABLE IF EXISTS ExerciseType');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseType (exerciseTypeId integer primary key, name text, unit text)');
                 });
             db.transaction(function (tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseDescription (exerciseDescriptionId integer primary key, name text, exerciseTypeId integer, foreign key(exerciseTypeId) references ExerciseType(exerciseTypeId))');
+                //tx.executeSql('DROP TABLE IF EXISTS Exercise');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Exercise (exerciseId integer primary key, name text, exerciseTypeId integer, foreign key(exerciseTypeId) references ExerciseType(exerciseTypeId))');
             });
             db.transaction(function (tx) {
-                tx.executeSql('DROP TABLE IF EXISTS Training');
+                //tx.executeSql('DROP TABLE IF EXISTS Training');
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Training (trainingId blob primary key, startTime text, endTime text)');
             });
             db.transaction(function (tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS Exercise (exerciseId integer primary key, trainingId integer, exerciseDescriptionId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseDescriptionId) references ExerciseDescription(exerciseDescriptionId))');
+                //tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseGroup (exerciseGroupId integer primary key, exerciseId integer, trainingId integer, groupId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseId) references Exercise(exerciseId))');
             });
             db.transaction(function (tx) {
-                tx.executeSql('DROP TABLE IF EXISTS Sets');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS Sets (setId integer primary key, exerciseId integer, value real, repetitions integer, foreign key(exerciseId) references Exercise(exerciseId))');
+                //tx.executeSql('DROP TABLE IF EXISTS Set');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Set (setId integer primary key, exerciseGroupId integer, value real, repetitions integer, foreign key(exerciseGroupId) references ExerciseGroup(exerciseGroupId))');
             });
         },
         initExerciseTypes: function(){
@@ -62,18 +64,18 @@ angular.module('dataAccessModule',[ ])
         },
         addExercise: function(exercise){
             db.transaction(function (tx) {
-                tx.executeSql("INSERT INTO ExerciseDescription (name, exerciseTypeId) VALUES (?,?)", [exercise.name, exercise.type]);
+                tx.executeSql("INSERT INTO Exercise (name, exerciseTypeId) VALUES (?,?)", [exercise.name, exercise.type]);
             });
         },
         getExercises: function(callback){
             db.transaction(function (tx) {
-                tx.executeSql("select * from ExerciseDescription", [], function(tx, res) {
+                tx.executeSql("select * from Exercise", [], function(tx, res) {
                     var results = [];
                     var len = res.rows.length;
                     if(len > 0){
                         for(i = 0; i < len; i++){
                             var element = {
-                                id: res.rows.item(i)['exerciseDescriptionId'],
+                                id: res.rows.item(i)['exerciseId'],
                                 name: res.rows.item(i)['name'],
                                 type: res.rows.item(i)['exerciseTypeId'],
                                 description: ''

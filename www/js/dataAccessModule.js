@@ -19,8 +19,8 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Training (trainingId blob primary key, startTime text, endTime text)');
             });
             db.transaction(function (tx) {
-                //tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseGroup (exerciseGroupId integer primary key, exerciseId integer, trainingId integer, groupId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseId) references Exercise(exerciseId))');
+                tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseGroup (exerciseGroupId integer primary key, exerciseId integer, trainingId blob, groupId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseId) references Exercise(exerciseId))');
             });
             db.transaction(function (tx) {
                 //tx.executeSql('DROP TABLE IF EXISTS Set');
@@ -153,8 +153,18 @@ angular.module('dataAccessModule',[ ])
                 ];
             callback(repetitionList);
         },
+        createExerciseGroup : function(data, callback){
+            db.transaction(function(tx){
+                tx.executeSql("INSERT INTO ExerciseGroup (exerciseId, trainingId, groupId) VALUES (?,?,?)", [data.exerciseId, data.trainingId, data.groupId], function(tx, res) {
+                     console.log("insertId: " + res.insertId);
+                     callback(res.insertId);   
+                 });
+            });    
+        },
         saveDoneRepetitions: function(data){
-
+            db.transaction(function(tx){
+                tx.executeSql("INSERT INTO Set (exerciseGroupId, value, repetitions) VALUES (?,?,?)", [data.exerciseGroupId, data.value, data.repetitions]);
+            });
         }
     })
     .run(function(){

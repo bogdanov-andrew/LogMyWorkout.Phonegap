@@ -1,5 +1,5 @@
-var app = angular.module('logResultsPage',[ 'dataAccessModule' ]);
-app.controller('LogResultsPageController', function($interval, $location, $scope, dataAccess){
+var app = angular.module('logResultsPage',[ 'dataAccessModule', 'trainingInfoModule' ]);
+app.controller('LogResultsPageController', function($interval, $location, $scope, dataAccess, trainingInfoService){
 	$scope.repetitionList = [];
 
     $scope.repetitionsLoaded = function(data){
@@ -21,18 +21,38 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
         $location.path('/timer');
 	};
 
-	$scope.logRepetition = function(){
+	$scope.continueSaving = function(){
 		var weight = $('#repetition-weight').val();
 		var count = $('#repetition-count').val();
 		var newRepetition = {
-			id: 5,
-			exerciseId: 1,
-			weight: weight,
+			exerciseGroupId: trainingInfoService.getExerciseGroupId(),
+			value: weight,
 			repetitions: count
 		};
-        dataAccess.saveDoneRepetitions(newRepetition);
+
+		dataAccess.saveDoneRepetitions(newRepetition);
 		$scope.loadRepeptitions();
-        //this.repetitionList.push(newRepetition);
 		$("#addExerciseRepetitionModal").modal("hide");
+	}
+
+	$scope.getExerciseGroupId = function(id){
+		trainingInfoService.setExerciseGroupId(id);
+		$scope.continueSaving();
+	};
+
+	$scope.logRepetition = function(){
+		        
+        var groupId = trainingInfoService.getExerciseGroupId();
+		if(groupId == 0)
+		{
+			var newGroupData = {
+				exerciseId: trainingInfoService.getExerciseId(),
+				traningId: trainingInfoService.getTrainingId(),
+				groupId: 0
+			};
+			dataAccess.createExerciseGroup(newGroupData, $scope.getExerciseGroupId);
+		}else{
+			$scope.continueSaving();
+		}
 	};
 });

@@ -1,35 +1,51 @@
 var module = angular.module('trainingInfoModule',[ ]);
 
 function TrainingService(){
-   this.trainingId = 0;
-   this.exerciseId = 0;
+   var trainingId = 0;
+   var exerciseId = 0;
+   var exerciseGroupId = 0;
    this.getTrainingId = function(){
        console.log('getTrainingId:' + this.trainingId);
-       return this.trainingId;
+       return trainingId;
    };
 
    this.setTrainingId = function (id){
        console.log('setTrainingId:' + id);
-       this.trainingId = id;
+       trainingId = id;
    };
 
-   function getExerciseId (){
+   this.getExerciseId = function(){
        return exerciseId;
    };
 
-   function setExerciseId (id){
+   this.setExerciseId = function(id){
        exerciseId = id;
    };
 
+    this.getExerciseGroupId = function(){
+        return exerciseGroupId;
+    };
+
+    this.setExerciseGroupId = function(id){
+        exerciseGroupId = id;
+    };
+
     return{
         trainingId: this.trainingId,
+        
         getTrainingId: this.getTrainingId,
-        setTrainingId: this.setTrainingId
+        setTrainingId: this.setTrainingId,
+        
+        getExerciseId: this.getExerciseId,
+        setExerciseId: this.setExerciseId,
+        
+        getExerciseGroupId: this.getExerciseGroupId,
+        setExerciseGroupId: this.setExerciseGroupId
     };
 };
 
-//module.factory('trainingInfoService',TrainingService);
-module.provider('trainingInfoService',function(){
+module.factory('trainingInfoService',TrainingService);
+/*module.provider('trainingInfoService',function(){
     var trainingId = 0;
     function getTrainingId (){
         console.log('getTrainingId:' + trainingId);
@@ -48,4 +64,4 @@ module.provider('trainingInfoService',function(){
         }
     }
 
-});
+});*/

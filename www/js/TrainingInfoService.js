@@ -5,7 +5,7 @@ function TrainingService(){
    var exerciseId = 0;
    var exerciseGroupId = 0;
    this.getTrainingId = function(){
-       console.log('getTrainingId:' + this.trainingId);
+       console.log('getTrainingId:' + trainingId);
        return trainingId;
    };
 
@@ -30,9 +30,7 @@ function TrainingService(){
         exerciseGroupId = id;
     };
 
-    return{
-        trainingId: this.trainingId,
-        
+    return{    
         getTrainingId: this.getTrainingId,
         setTrainingId: this.setTrainingId,
         

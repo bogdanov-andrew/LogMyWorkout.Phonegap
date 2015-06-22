@@ -21,6 +21,7 @@ app.controller('ExercisePageController', function($scope, $location, dataAccess,
         $('#exercise-name').focus();
     });
     $scope.doExercise = function(number){
+        trainingInfoService.setExerciseId(number);
         $location.path('/logresults');
     };
     $scope.saveExercise = function(){

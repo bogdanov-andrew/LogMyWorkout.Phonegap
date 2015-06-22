@@ -47,7 +47,7 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
 		{
 			var newGroupData = {
 				exerciseId: trainingInfoService.getExerciseId(),
-				traningId: trainingInfoService.getTrainingId(),
+				trainingId: trainingInfoService.getTrainingId(),
 				groupId: 0
 			};
 			dataAccess.createExerciseGroup(newGroupData, $scope.getExerciseGroupId);

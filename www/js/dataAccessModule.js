@@ -23,7 +23,8 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseGroup (exerciseGroupId integer primary key, exerciseId integer, trainingId blob, groupId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseId) references Exercise(exerciseId))');
             });
             db.transaction(function (tx) {
-                //tx.executeSql('DROP TABLE IF EXISTS Set');
+                tx.executeSql('DROP TABLE IF EXISTS Sets');
+                tx.executeSql('DROP TABLE IF EXISTS Set');
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Set (setId integer primary key, exerciseGroupId integer, value real, repetitions integer, foreign key(exerciseGroupId) references ExerciseGroup(exerciseGroupId))');
             });
         },

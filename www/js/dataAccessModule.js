@@ -24,8 +24,7 @@ angular.module('dataAccessModule',[ ])
             });
             db.transaction(function (tx) {
                 tx.executeSql('DROP TABLE IF EXISTS Sets');
-                tx.executeSql('DROP TABLE IF EXISTS Set');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS Set (setId integer primary key, exerciseGroupId integer, value real, repetitions integer, foreign key(exerciseGroupId) references ExerciseGroup(exerciseGroupId))');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS Sets (setId integer primary key, exerciseGroupId integer, value real, repetitions integer, foreign key(exerciseGroupId) references ExerciseGroup(exerciseGroupId))');
             });
         },
         initExerciseTypes: function(){
@@ -164,7 +163,7 @@ angular.module('dataAccessModule',[ ])
         },
         saveDoneRepetitions: function(data){
             db.transaction(function(tx){
-                tx.executeSql("INSERT INTO Set (exerciseGroupId, value, repetitions) VALUES (?,?,?)", [data.exerciseGroupId, data.value, data.repetitions]);
+                tx.executeSql("INSERT INTO Sets (exerciseGroupId, value, repetitions) VALUES (?,?,?)", [data.exerciseGroupId, data.value, data.repetitions]);
             });
         }
     })

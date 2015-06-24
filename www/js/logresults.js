@@ -8,7 +8,8 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
     };
 
     $scope.loadRepeptitions = function(){
-        dataAccess.getDoneRepetitions($scope.repetitionsLoaded);
+        //todo: load from service
+        dataAccess.getDoneRepetitions(1, $scope.repetitionsLoaded);
     }
 
     $scope.loadRepeptitions();

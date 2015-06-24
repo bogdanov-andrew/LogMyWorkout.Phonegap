@@ -89,6 +89,7 @@ angular.module('dataAccessModule',[ ])
             });
         },
         getLastTrainInformation: function(callback){
+            
             var exerciseList = {
                 lastTrain: '2015-03-15',
                 exercises: [
@@ -117,8 +118,28 @@ angular.module('dataAccessModule',[ ])
 
             callback(exerciseList);
         },
-        getDoneRepetitions: function(callback){
-            var repetitionList =
+        getDoneRepetitions: function(exerciseGroupId, callback){
+            
+            db.transaction(function(tx){
+                    tx.executeSql("select * from Sets where exerciseGroupId=?", [exerciseGroupId], function(tx, res) {
+                            var results = [];
+                            var len = res.rows.length;
+                            if(len > 0){
+                                for(i = 0; i < len; i++){
+                                    var element = {
+                                        id: res.rows.item(i)['setId'],
+                                        exerciseId: res.rows.item(i)['exerciseGroupId'],
+                                        weight: res.rows.item(i)['value'],
+                                        repetitions: res.rows.item(i)['repetitions']
+                                    }
+                                    console.log(element.name);
+                                    results.push(element);
+                                }
+                            }
+                            callback(results);
+                        });
+            });
+            /*var repetitionList =
                 [
                     {
                         id: 1,
@@ -151,7 +172,7 @@ angular.module('dataAccessModule',[ ])
                         repetitions: 7
                     }
                 ];
-            callback(repetitionList);
+            callback(repetitionList);*/
         },
         createExerciseGroup : function(data, callback){
             db.transaction(function(tx){

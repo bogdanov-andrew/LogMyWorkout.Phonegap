@@ -35,8 +35,8 @@
 
 		function start() {
 			//dataAccess.initDb();
+			dataAccess.recreateTables();
 			dataAccess.createScheme();
-			//dataAccess.initTables();
 		}
 
 		this.exerciseInformationLoaded = function(data){

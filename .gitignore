@@ -1,2 +1,6 @@
+/platforms
 /platforms/android/ant-build
 /platforms/android/assets
+/node_modules
+/plugins
+/www/.idea

@@ -4,7 +4,9 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
 
     $scope.repetitionsLoaded = function(data){
         console.log(data.length);
-        $scope.repetitionList = data;
+        $scope.$apply(function(){
+            $scope.repetitionList = data;
+        });
     };
 
     $scope.loadRepeptitions = function(){

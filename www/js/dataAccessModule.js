@@ -19,11 +19,11 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Training (trainingId blob primary key, startTime text, endTime text)');
             });
             db.transaction(function (tx) {
-                tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
+                //tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ExerciseGroup (exerciseGroupId integer primary key, exerciseId integer, trainingId blob, groupId integer, foreign key(trainingId) references Training(trainingId), foreign key(exerciseId) references Exercise(exerciseId))');
             });
             db.transaction(function (tx) {
-                tx.executeSql('DROP TABLE IF EXISTS Sets');
+                //tx.executeSql('DROP TABLE IF EXISTS Sets');
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Sets (setId integer primary key, exerciseGroupId integer, value real, repetitions integer, foreign key(exerciseGroupId) references ExerciseGroup(exerciseGroupId))');
             });
         },
@@ -33,6 +33,20 @@ angular.module('dataAccessModule',[ ])
                 tx.executeSql("INSERT INTO ExerciseType (exerciseTypeId, name, unit) VALUES (?,?,?)", [1,"Repetitions", "rep"]);
                 tx.executeSql("INSERT INTO ExerciseType (exerciseTypeId, name, unit) VALUES (?,?,?)", [2,"Weight + Repetitions", "kg * rep"]);
             });
+        },
+        recreateTables: function(){
+            db.transaction(function(tx){
+                tx.executeSql('DROP TABLE IF EXISTS Sets');
+                console.log('Stes dropped');
+                tx.executeSql('DROP TABLE IF EXISTS ExerciseGroup');
+                console.log('ExerciseGroup dropped');
+                tx.executeSql('DROP TABLE IF EXISTS Training');
+                console.log('Training dropped');
+                tx.executeSql('DROP TABLE IF EXISTS Exercise');
+                console.log('Exercise dropped');
+                tx.executeSql('DROP TABLE IF EXISTS ExerciseType');
+                console.log('ExerciseType dropped');
+            }); 
         },
         getExerciseTypes: function(callback){
             db.transaction(function(tx){

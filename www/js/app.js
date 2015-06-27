@@ -1,5 +1,5 @@
 (function(){ 
-	var app = angular.module('startPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage' ]);
+	var app = angular.module('startPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule' ]);
 	app.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
@@ -7,6 +7,10 @@
                     templateUrl: 'startPage.html',
                     controller: 'StartPageController'
                 }).
+				when('/#', {
+					templateUrl: 'startPage.html',
+					controller: 'StartPageController'
+				}).
                 when('/exercises', {
 					templateUrl: 'exercises.html',
 					controller: 'ExercisePageController'
@@ -23,7 +27,7 @@
 					redirectTo: '/'
 				});
 		}]);
-	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService){
+	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService, navigationService){
 
 		$scope.trainData = {};
 
@@ -66,8 +70,8 @@
 
             dataAccess.startTraining(trainingInfo);
             trainingInfoService.setTrainingId(trainingInfo.id);
-
-            $location.path('/exercises');
+            navigationService.navigateToExercises();
+            //$location.path('/exercises');
             $scope.$apply();
 		  });
 

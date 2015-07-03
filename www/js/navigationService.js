@@ -4,17 +4,27 @@ module.factory('navigationService', [ '$location', function($location){
 
     var historyList = [];
 
+    function changeLocation(location){
+        $location.path(location);
+    };
+
     this.navigateBack = function(){
         var backPage = historyList.pop();
-        $location.path(backPage);
+        changeLocation(backPage);
     };
 
     this.navigateToExercises = function(){
-        historyList.push($location.path());
-        $location.path('/exercises');
+        historyList.push($location.url());
+        changeLocation('/exercises');
+    };
+
+    this.navigateToLogResults = function(){
+        historyList.push($location.url());
+        changeLocation('/logresults');
     };
 
     return{
+        navigateToLogResults: this.navigateToLogResults,
         navigateToExercises: this.navigateToExercises,
         navigateBack: this.navigateBack
     };

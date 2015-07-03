@@ -28,9 +28,10 @@
         <script src="js/external/fastclick.js"></script>
         <script type="text/javascript" src="js/timerPage.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <base href="/">
         <title>Hello World</title>
     </head>
-    <body class="body" >
+    <body class="body" ng-controller="StartPageController">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,7 +42,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <button type="button" class="btn btn-default navbar-btn" id="backButton">
+                    <button type="button" class="btn btn-default navbar-btn" id="backButton" ng-click="backAction()">
                         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                     </button>
                     <a class="navbar-text" href="#">Log My Workout</a>
@@ -56,7 +57,6 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-
         <div ng-view></div>
 
     </body>

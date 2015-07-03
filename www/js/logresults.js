@@ -1,5 +1,5 @@
-var app = angular.module('logResultsPage',[ 'dataAccessModule', 'trainingInfoModule' ]);
-app.controller('LogResultsPageController', function($interval, $location, $scope, dataAccess, trainingInfoService){
+var app = angular.module('logResultsPage',[ 'dataAccessModule', 'trainingInfoModule', 'navigationModule' ]);
+app.controller('LogResultsPageController', function($interval, $location, $scope, dataAccess, trainingInfoService, navigationService){
 	$scope.repetitionList = [];
 
     $scope.repetitionsLoaded = function(data){
@@ -12,7 +12,7 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
     $scope.loadRepeptitions = function(){
         //todo: load from service
         dataAccess.getDoneRepetitions(1, $scope.repetitionsLoaded);
-    }
+    };
 
     $scope.loadRepeptitions();
 

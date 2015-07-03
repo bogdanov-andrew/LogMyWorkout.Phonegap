@@ -1,16 +1,12 @@
 (function(){ 
 	var app = angular.module('startPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule' ]);
-	app.config(['$routeProvider',
-		function($routeProvider) {
+	app.config(['$routeProvider', '$locationProvider',
+		function($routeProvider, $locationProvider) {
 			$routeProvider.
                 when('/', {
                     templateUrl: 'startPage.html',
                     controller: 'StartPageController'
                 }).
-				when('/#', {
-					templateUrl: 'startPage.html',
-					controller: 'StartPageController'
-				}).
                 when('/exercises', {
 					templateUrl: 'exercises.html',
 					controller: 'ExercisePageController'
@@ -26,10 +22,15 @@
 				otherwise({
 					redirectTo: '/'
 				});
+
+				$locationProvider.html5Mode(true);
 		}]);
-	app.controller('StartPageController', function($scope, $location, dataAccess, trainingInfoService, navigationService){
+	app.controller('StartPageController', function($scope, $location, $rootScope, dataAccess, trainingInfoService, navigationService){
 
 		$scope.trainData = {};
+		$scope.backAction = function() {
+            navigationService.navigateBack();
+        };
 
 		if( window.cordova ) {
 			document.addEventListener( 'deviceready', start, false );
@@ -39,9 +40,9 @@
 
 		function start() {
 			//dataAccess.initDb();
-			dataAccess.recreateTables();
+			//dataAccess.recreateTables();
 			dataAccess.createScheme();
-		}
+		};
 
 		this.exerciseInformationLoaded = function(data){
 			console.log(data.exercises.length);
@@ -59,7 +60,7 @@
             }
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
                 s4() + '-' + s4() + s4() + s4();
-        }
+        };
 
 		$('#myButton').on('click', function () {
 			trainingInfo = {
@@ -71,7 +72,6 @@
             dataAccess.startTraining(trainingInfo);
             trainingInfoService.setTrainingId(trainingInfo.id);
             navigationService.navigateToExercises();
-            //$location.path('/exercises');
             $scope.$apply();
 		  });
 

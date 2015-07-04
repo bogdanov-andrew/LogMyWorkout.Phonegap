@@ -102,30 +102,89 @@ angular.module('dataAccessModule',[ ])
                 });
             });
         },
+        getTrainData: function(trainingId, callback){
+            var sqlQuery = "select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t " +
+                            "join ExerciseGroup eg on t.trainingId = eg.trainingId " +
+                            "join Exercise ex on eg.exerciseId=ex.exerciseId " +
+                            "join Sets s on eg.exerciseGroupId=s.exerciseGroupId " +
+                            "where t.trainingId=?";
+            db.transaction(function (tx) {
+                tx.executeSql(sqlQuery, [trainingId], function(tx, res) {
+                    var rawTrainData = [];
+                    var resultTrainData = {};
+                    var len = res.rows.length;
+                    if(len > 0){
+                        for(i = 0; i < len; i++){
+                            var element = {
+                                trainingId: res.rows.item(i)['trainingId'],
+                                time: res.rows.item(i)['startTime'],
+                                exerciseGroupId: res.rows.item(i)['exerciseGroupId'],
+                                exerciseId: res.rows.item(i)['exerciseId'],
+                                name: res.rows.item(i)['name'],
+                                setId: res.rows.item(i)['setId'],
+                                value: res.rows.item(i)['value'],
+                                repetitions: res.rows.item(i)['repetitions']
+                            };
+                            console.log(element.trainingId);
+                            rawTrainData.push(element);
+                        }
+
+                        var exerciseGroups = Enumerable.From(rawTrainData)
+                            .GroupBy(function(x){ return x.exerciseGroupId; })
+                            .Select(function(x, index){ return { 	exerciseGroupId:x.Key(),
+                                number: index,
+                                exercises: x.Where(function(y){ return x.exerciseGroupId = y.exerciseGroupId}).Distinct(function(x){ return x.exerciseId })
+                                            .Select(function(y){
+                                                return { 	exerciseId: y.exerciseId,
+                                                            name: y.name,
+                                                            sets: x.Where(function(z){ return y.exerciseId = z.exerciseId})
+                                                                    .Select(function(z){
+                                                                        return { 	setId: z.setId,
+                                                                                    value: z.value,
+                                                                                    repetitions: z.repetitions}})
+                                                                    .ToArray() };})
+                                            .ToArray() } })
+                            .ToArray();
+
+                        resultTrainData.trainingId = rawTrainData[0].trainingId;
+                        resultTrainData.time = rawTrainData[0].time;
+                        resultTrainData.exerciseGroups = exerciseGroups;
+                    }
+                    callback(resultTrainData);
+                });
+            });
+        },
         getLastTrainInformation: function(callback){
-            
+            /*
+            * select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t join ExerciseGroup eg on t.trainingId = eg.trainingId join Exercise ex on eg.exerciseId=ex.exerciseId join Sets s on eg.exerciseGroupId=s.exerciseGroupId where t.trainingId='75dfdefb-9247-81da-8fea-f645d73d6df6'
+            * select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t join ExerciseGroup eg on t.trainingId = eg.trainingId join Exercise ex on eg.exerciseId=ex.exerciseId join Sets s on eg.exerciseGroupId=s.exerciseGroupId where t.startTime = (select max(startTime) from Training)
+            * */
             var exerciseList = {
+                traingId: '75dfdefb-9247-81da-8fea-f645d73d6df6',
                 lastTrain: '2015-03-15',
-                exercises: [
+                exerciseGroups:[
                     {
-                        number: 1,
-                        name: 'Pop up',
-                        result: '10-12-13'
-                    },
-                    {
-                        number: 2,
-                        name: 'Push up',
-                        result: '10-12-13'
-                    },
-                    {
-                        number: 3,
-                        name: 'Hyperextensy',
-                        result: '10-12-13'
-                    },
-                    {
-                        number: 4,
-                        name: 'Push up',
-                        result: '10-12-13'
+                        exerciseGroupId: 1,
+                        exercises: [
+                            {
+                                number: 1,
+                                exerciseId: 1,
+                                name: 'Pop up',
+                                result: '10-12-13',
+                                sets: [
+                                    {
+                                        setId: 1,
+                                        value: 10,
+                                        repetitions: 10
+                                    },
+                                    {
+                                        setId: 2,
+                                        value: 11,
+                                        repetitions: 11
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             };

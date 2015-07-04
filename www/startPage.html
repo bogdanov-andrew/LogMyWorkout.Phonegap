@@ -1,18 +1,18 @@
 <div class="container">
     <div class="top-part">
         <span class="done-text">Previously Done</span>
-        <span class="date-text">{{trainData.lastTrain | date:'dd MMMM yyyy'}}</span>
+        <span class="date-text">{{trainData.time | date:'dd MMMM yyyy'}}</span>
     </div>
     <div class="exercise-list">
         <div class="list-group">
-            <a href="#" class="list-group-item" ng-repeat="exercise in trainData.exercises">
+            <a href="#" class="list-group-item" ng-repeat="exerciseGroup in trainData.exerciseGroups">
                 <div class="exercise-item">
                     <div class="exercise-item-left">
-                        <span class="exercise-number">{{exercise.number}}</span>
+                        <span class="exercise-number">{{exerciseGroup.number}}</span>
                     </div>
                     <div class="exercise-item-body">
-                        <h4 class="list-group-item-heading">{{exercise.name}}</h4>
-                        <p class="list-group-item-text">{{exercise.result}}</p>
+                        <h4 class="list-group-item-heading">{{exerciseGroup.exercises[0].name}}</h4>
+                        <p class="list-group-item-text">{{exerciseGroup.exercises[0].result}}</p>
                     </div>
                 </div>
             </a>

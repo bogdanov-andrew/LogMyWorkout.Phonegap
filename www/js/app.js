@@ -40,17 +40,19 @@
 
 		function start() {
 			//dataAccess.initDb();
-			dataAccess.recreateTables();
+			//dataAccess.recreateTables();
 			dataAccess.createScheme();
 		};
 
 		this.exerciseInformationLoaded = function(data){
-			console.log(data.exercises.length);
-			console.log(data.lastTrain);
-			$scope.trainData = data;
+			//console.log(data.exercises.length);
+			//console.log(data.lastTrain);
+			$scope.$apply(function(){
+				$scope.trainData = data;
+			});
 		};
 
-		dataAccess.getLastTrainInformation(this.exerciseInformationLoaded);
+		dataAccess.getTrainData('75dfdefb-9247-81da-8fea-f645d73d6df6',this.exerciseInformationLoaded);
 
         function guid() {
             function s4() {

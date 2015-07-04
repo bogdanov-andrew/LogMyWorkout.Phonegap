@@ -3,6 +3,10 @@
 	app.config(['$routeProvider', '$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider.
+                when('', {
+                    templateUrl: 'startPage.html',
+                    controller: 'StartPageController'
+                }).
                 when('/', {
                     templateUrl: 'startPage.html',
                     controller: 'StartPageController'
@@ -28,10 +32,7 @@
 	app.controller('StartPageController', function($scope, $location, $rootScope, dataAccess, trainingInfoService, navigationService){
 
 		$scope.trainData = {};
-		$scope.backAction = function() {
-            navigationService.navigateBack();	
-        };
-
+		
 		if( window.cordova ) {
 			document.addEventListener( 'deviceready', start, false );
 		} else {
@@ -44,7 +45,11 @@
 			dataAccess.createScheme();
 		};
 
-		$scope.exerciseInformationLoaded = function(data){
+		$scope.backAction = function() {
+            navigationService.navigateBack();	
+        };
+
+        $scope.exerciseInformationLoaded = function(data){
 			$scope.$apply(function(){
 				$scope.trainData = data;
 			});
@@ -54,7 +59,7 @@
             dataAccess.getTrainData(trainingId, $scope.exerciseInformationLoaded);
         };
 
-        dataAccess.getLastTrainingId($scope.lastTrainingIdLoaded);
+		dataAccess.getLastTrainingId($scope.lastTrainingIdLoaded);
 
         function guid() {
             function s4() {

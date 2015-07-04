@@ -4,6 +4,7 @@ function TrainingService(){
    var trainingId = 0;
    var exerciseId = 0;
    var exerciseGroupId = 0;
+
    this.getTrainingId = function(){
        console.log('getTrainingId:' + trainingId);
        return trainingId;
@@ -43,23 +44,3 @@ function TrainingService(){
 };
 
 module.factory('trainingInfoService',TrainingService);
-/*module.provider('trainingInfoService',function(){
-    var trainingId = 0;
-    function getTrainingId (){
-        console.log('getTrainingId:' + trainingId);
-        return trainingId;
-    };
-
-    function setTrainingId(id){
-        console.log('setTrainingId:' + id);
-        trainingId = id;
-    };
-
-    this.$get = function() {
-        return {
-            getTrainingId: getTrainingId,
-            setTrainingId: setTrainingId
-        }
-    }
-
-});*/

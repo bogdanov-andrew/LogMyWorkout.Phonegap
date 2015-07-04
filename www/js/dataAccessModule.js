@@ -102,6 +102,19 @@ angular.module('dataAccessModule',[ ])
                 });
             });
         },
+        getLastTrainingId: function(callback){
+            var trainingId = 0;
+            db.transaction(function(tx){
+                tx.executeSql("select trainingId from Training where startTime=(select max(startTime) from Training)", [], function(tx, res) {
+                    var len = res.rows.length;
+                    if(len > 0){
+                        trainingId = res.rows.item(0)['trainingId'];
+                        console.log('getLastTrainingId: ' + trainingId);
+                    }
+                    callback(trainingId);
+                });
+            });
+        },
         getTrainData: function(trainingId, callback){
             var sqlQuery = "select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t " +
                             "join ExerciseGroup eg on t.trainingId = eg.trainingId " +
@@ -132,7 +145,7 @@ angular.module('dataAccessModule',[ ])
                         var exerciseGroups = Enumerable.From(rawTrainData)
                             .GroupBy(function(x){ return x.exerciseGroupId; })
                             .Select(function(x, index){ return { 	exerciseGroupId:x.Key(),
-                                number: index,
+                                number: index+1,
                                 exercises: x.Where(function(y){ return x.exerciseGroupId = y.exerciseGroupId}).Distinct(function(x){ return x.exerciseId })
                                             .Select(function(y){
                                                 return { 	exerciseId: y.exerciseId,
@@ -153,43 +166,6 @@ angular.module('dataAccessModule',[ ])
                     callback(resultTrainData);
                 });
             });
-        },
-        getLastTrainInformation: function(callback){
-            /*
-            * select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t join ExerciseGroup eg on t.trainingId = eg.trainingId join Exercise ex on eg.exerciseId=ex.exerciseId join Sets s on eg.exerciseGroupId=s.exerciseGroupId where t.trainingId='75dfdefb-9247-81da-8fea-f645d73d6df6'
-            * select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t join ExerciseGroup eg on t.trainingId = eg.trainingId join Exercise ex on eg.exerciseId=ex.exerciseId join Sets s on eg.exerciseGroupId=s.exerciseGroupId where t.startTime = (select max(startTime) from Training)
-            * */
-            var exerciseList = {
-                traingId: '75dfdefb-9247-81da-8fea-f645d73d6df6',
-                lastTrain: '2015-03-15',
-                exerciseGroups:[
-                    {
-                        exerciseGroupId: 1,
-                        exercises: [
-                            {
-                                number: 1,
-                                exerciseId: 1,
-                                name: 'Pop up',
-                                result: '10-12-13',
-                                sets: [
-                                    {
-                                        setId: 1,
-                                        value: 10,
-                                        repetitions: 10
-                                    },
-                                    {
-                                        setId: 2,
-                                        value: 11,
-                                        repetitions: 11
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            };
-
-            callback(exerciseList);
         },
         getDoneRepetitions: function(exerciseGroupId, callback){
             

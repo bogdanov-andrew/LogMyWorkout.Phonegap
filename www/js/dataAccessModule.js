@@ -146,7 +146,7 @@ angular.module('dataAccessModule',[ ])
                                         weight: res.rows.item(i)['value'],
                                         repetitions: res.rows.item(i)['repetitions']
                                     }
-                                    console.log(element.name);
+                                    console.log(element.exerciseId);
                                     results.push(element);
                                 }
                             }

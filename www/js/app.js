@@ -29,7 +29,7 @@
 
 		$scope.trainData = {};
 		$scope.backAction = function() {
-            navigationService.navigateBack();
+            navigationService.navigateBack();	
         };
 
 		if( window.cordova ) {
@@ -40,7 +40,7 @@
 
 		function start() {
 			//dataAccess.initDb();
-			//dataAccess.recreateTables();
+			dataAccess.recreateTables();
 			dataAccess.createScheme();
 		};
 
@@ -71,8 +71,9 @@
 
             dataAccess.startTraining(trainingInfo);
             trainingInfoService.setTrainingId(trainingInfo.id);
-            navigationService.navigateToExercises();
-            $scope.$apply();
+            $scope.$apply(function(){
+            	navigationService.navigateToExercises();	
+            });
 		  });
 
 	});

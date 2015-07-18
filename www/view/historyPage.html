@@ -6,6 +6,9 @@
             <a class="list-group-item" ng-repeat="traininig in history">
                 <div class="exercise-item">
                     {{traininig.time | date:'dd MMMM yyyy'}}
+                    <div ng-repeat="ex in traininig.exerciseGroups">
+                        {{ex.exercises[0].name}}
+                    </div>
                 </div>
             </a>
         </div>

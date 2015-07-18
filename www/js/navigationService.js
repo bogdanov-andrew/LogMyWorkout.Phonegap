@@ -23,9 +23,15 @@ module.factory('navigationService', [ '$location', function($location){
         changeLocation('/logresults');
     };
 
+    this.navigateToHistory = function(){
+        historyList.push($location.url());
+        changeLocation('/history');
+    };
+
     return{
         navigateToLogResults: this.navigateToLogResults,
         navigateToExercises: this.navigateToExercises,
+        navigateToHistory: this.navigateToHistory,
         navigateBack: this.navigateBack
     };
 }]);

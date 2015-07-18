@@ -1,5 +1,5 @@
 (function(){ 
-	var app = angular.module('masterPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule', 'startPage' ]);
+	var app = angular.module('masterPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule', 'startPage', 'historyPage' ]);
 	app.config(['$routeProvider', '$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider.
@@ -19,6 +19,10 @@
                     templateUrl: 'view/timerPage.html',
                     controller: 'TimerPageController'
                 }).
+				when('/history', {
+					templateUrl: 'view/historyPage.html',
+					controller: 'HistoryPageController'
+				}).
 				otherwise({
 					redirectTo: '/'
 				});
@@ -38,6 +42,10 @@
 			//dataAccess.initDb();
 			//dataAccess.recreateTables();
 			dataAccess.createScheme();
+		};
+
+		$scope.historyRequest = function(){
+			navigationService.navigateToHistory();
 		};
 
         $scope.backAction = function() {

@@ -9,7 +9,7 @@ app.controller('HistoryPageController', function($scope, $location, dataAccess, 
     };
 
     $scope.loadHistory = function(){
-        dataAccess.getExercises(this.historyListLoaded);
+        dataAccess.getTrainHistoryData(this.historyListLoaded);
     };
 
     $scope.loadHistory();

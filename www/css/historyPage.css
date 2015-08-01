@@ -1,0 +1,19 @@
+.history-header{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25pt;
+}
+.history-training-time{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 12pt;
+    color: silver;
+    text-align: right;
+}
+.history-training-results{
+    font-style: italic;
+}
+.history-training-name{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+}

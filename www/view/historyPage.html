@@ -3,14 +3,19 @@
 
     <div class="exercise-list">
         <div class="list-group">
-            <a class="list-group-item" ng-repeat="traininig in history">
+            <div class="list-group-item" ng-repeat="traininig in history">
                 <div class="exercise-item">
                     {{traininig.time | date:'dd MMMM yyyy'}}
                     <div ng-repeat="ex in traininig.exerciseGroups">
-                        {{ex.exercises[0].name}}
+                        <div>
+                            {{ex.exercises[0].name}}
+                        </div>
+                        <div>
+                            {{formatSets(ex.exercises[0].sets)}}
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>

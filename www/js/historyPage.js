@@ -12,5 +12,11 @@ app.controller('HistoryPageController', function($scope, $location, dataAccess, 
         dataAccess.getTrainHistoryData(this.historyListLoaded);
     };
 
+    $scope.formatSets = function(sets){
+        var result = sets.reduce(function(str, currentSet) {  return str + currentSet.value + 'x' +currentSet.repetitions + ','; }, 0);
+        result = result.slice(0,result.length-1);
+        return result;
+    };
+
     $scope.loadHistory();
 });

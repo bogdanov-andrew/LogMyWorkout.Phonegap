@@ -1,14 +1,13 @@
-<div class="container">
+<div class="container history-container">
     <div class="history-header">
         Training History
     </div>
-    <div class="exercise-list">
+    <div class="history-list">
         <div class="list-group">
             <div class="list-group-item" ng-repeat="traininig in history">
-                <div class="exercise-item">
+                <div class="history-item">
                     <div class="history-training-time">{{traininig.time | date:'dd MMMM yyyy'}}</div>
-
-                    <div ng-repeat="ex in traininig.exerciseGroups">
+                    <div class="history-exercise-item" ng-repeat="ex in traininig.exerciseGroups">
                         <div class="history-training-name">
                             {{ex.exercises[0].name}}
                         </div>

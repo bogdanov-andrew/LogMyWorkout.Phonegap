@@ -171,7 +171,8 @@ angular.module('dataAccessModule',[ ])
             var sqlQuery = "select t.trainingId, t.startTime, eg.exerciseGroupId, ex.exerciseId, ex.name, s.setId, s.value, s.repetitions from Training t " +
                 "join ExerciseGroup eg on t.trainingId = eg.trainingId " +
                 "join Exercise ex on eg.exerciseId=ex.exerciseId " +
-                "join Sets s on eg.exerciseGroupId=s.exerciseGroupId";
+                "join Sets s on eg.exerciseGroupId=s.exerciseGroupId " + 
+                "order by t.startTime desc";
             db.transaction(function (tx) {
                 tx.executeSql(sqlQuery, [],function(tx, res) {
                     var rawTrainData = [];

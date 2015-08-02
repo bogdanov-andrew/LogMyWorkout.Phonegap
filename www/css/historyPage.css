@@ -7,13 +7,37 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     font-size: 12pt;
-    color: silver;
-    text-align: right;
+    color: #666666;
+    text-decoration: underline;
+    text-align: center;
 }
 .history-training-results{
-    font-style: italic;
+    font-style: normal;
 }
 .history-training-name{
+    text-decoration: initial;
+    font-weight: bold;
     font-family: 'Times New Roman', Times, serif;
     font-size: 12pt;
+    text-transform: capitalize;
+}
+.history-item {
+	margin: 0px;
+}
+.history-item2 {
+	margin: 0px;
+	height: 100%;
+}
+.history-exercise-item {
+    padding: 5px;
+}
+.history-list {
+	padding-left: 15px;
+	padding-bottom: 50px;
+	padding-right: 15px;
+	height: 100%;
+	overflow: auto;
+}
+.history-container{
+    height: 100%;
 }

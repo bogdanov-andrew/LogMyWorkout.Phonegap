@@ -1,8 +1,17 @@
 .body { padding-top: 70px; }
 
+@media screen and (max-device-height: 1280px) {
+	body {height: 1200px;}
+}
+
+.container-area {
+	height: 100%;
+}
+
 .top-part {
 	text-align: center;
 	padding-top: 0px;
+	height: 10%;
 }
 .exercise-number {
 	font-family: 'Times New Roman', Times, serif;
@@ -22,25 +31,26 @@
 	vertical-align: middle;
 }
 
-.exercise-list {
+.start-page-exercise-list {
 	padding-left: 15px;
-	padding-bottom: 50px;
 	padding-right: 15px;
+	height: 85%;
 }
 
 .exercise-bottom{
 	text-align: center;
+	height: 10%;
 }
 
 .done-text {
 	display:block;
-	font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
-    font-size: 40px; /* Размер шрифта в процентах */ 
+	font-family: 'Times New Roman', Times, serif; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */ 
+    font-size: 40px; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */ 
 }
 
 .date-text {
 	display:block;
-	font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */ 
-    font-size: 30px; /* Размер шрифта в процентах */
+	font-family: 'Times New Roman', Times, serif; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */ 
+    font-size: 30px; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 	padding-bottom: 10px;	
 }

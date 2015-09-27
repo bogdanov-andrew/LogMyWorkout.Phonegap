@@ -20,8 +20,12 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
 	});
 
 	$scope.startTimer = function() {
-        $location.path('/timer');
+        navigationService.navigateToTimer();
 	};
+
+    $scope.finishExercise = function() {
+        navigationService.navigateToWorkout();
+    };
 
 	$scope.logRepetition = function(){
         var weight = $('#repetition-weight').val();

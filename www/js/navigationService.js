@@ -13,6 +13,11 @@ module.factory('navigationService', [ '$location', function($location){
         changeLocation(backPage);
     };
 
+    this.navigateToWorkout = function(){
+        historyList.push($location.url());
+        changeLocation('/workout');
+    };
+
     this.navigateToExercises = function(){
         historyList.push($location.url());
         changeLocation('/exercises');
@@ -28,10 +33,17 @@ module.factory('navigationService', [ '$location', function($location){
         changeLocation('/history');
     };
 
+    this.navigateToTimer = function(){
+        historyList.push($location.url());
+        changeLocation('/timer');
+    };
+
     return{
         navigateToLogResults: this.navigateToLogResults,
         navigateToExercises: this.navigateToExercises,
+        navigateToWorkout: this.navigateToWorkout,
         navigateToHistory: this.navigateToHistory,
+        navigateToTimer: this.navigateToTimer,
         navigateBack: this.navigateBack
     };
 }]);

@@ -1,5 +1,5 @@
 (function(){ 
-	var app = angular.module('masterPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule', 'startPage', 'historyPage' ]);
+	var app = angular.module('masterPage', ['ngRoute', 'ngTouch', 'exercisePage', 'logResultsPage', 'dataAccessModule', 'trainingInfoModule', 'TimerPage', 'navigationModule', 'startPage', 'historyPage', 'workoutPage' ]);
 	app.config(['$routeProvider', '$locationProvider',
 		function($routeProvider, $locationProvider) {
 			$routeProvider.
@@ -7,6 +7,10 @@
                     templateUrl: 'view/startPage.html',
                     controller: 'StartPageController'
                 }).
+				when('/workout', {
+					templateUrl: 'view/workout.html',
+					controller: 'WorkoutPageController'
+				}).
                 when('/exercises', {
 					templateUrl: 'view/exercises.html',
 					controller: 'ExercisePageController'

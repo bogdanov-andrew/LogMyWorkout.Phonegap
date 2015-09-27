@@ -1,0 +1,34 @@
+<div class="container container-area">
+	Workout page
+
+	<div class="exercise-list">
+		<div class="list-group">
+		  <a href ng-click="doAnotherExercise()" class="list-group-item list-group-item-success">
+			<div class="exercise-item">
+				<div class="exercise-item-left">
+					<span class="exercise-number">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</span>
+				</div>
+				<div class="exercise-item-body">
+					<h4>Do another exercise</h4>
+				</div>
+			</div>
+		  </a>
+		  <a href ng-click="doExercise(exGroup)" class="list-group-item" ng-repeat="exGroup in exercises.exerciseGroups">
+			<div class="exercise-item">
+				<div class="exercise-item-left">
+					<span class="exercise-number">
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</span>
+				</div>
+				<div class="exercise-item-body">
+					<h4 class="list-group-item-heading">{{exGroup.exercises[0].name}}</h4>
+					<p class="list-group-item-text">{{exGroup.exercises[0].description}}</p>
+				</div>
+			</div>
+		  </a>
+		</div>
+	</div>
+</div>
+

@@ -35,7 +35,7 @@ app.controller('StartPageController', function($scope, $location, $rootScope, da
         dataAccess.startTraining(trainingInfo);
         trainingInfoService.setTrainingId(trainingInfo.id);
         $scope.$apply(function(){
-            navigationService.navigateToExercises();
+            navigationService.navigateToWorkout();
         });
     });
 });

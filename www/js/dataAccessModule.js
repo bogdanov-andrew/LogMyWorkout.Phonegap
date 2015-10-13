@@ -231,6 +231,7 @@ angular.module('dataAccessModule',[ ])
                                 for(i = 0; i < len; i++){
                                     var element = {
                                         id: res.rows.item(i)['setId'],
+                                        number: i+1,
                                         exerciseId: res.rows.item(i)['exerciseGroupId'],
                                         weight: res.rows.item(i)['value'],
                                         repetitions: res.rows.item(i)['repetitions']

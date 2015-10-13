@@ -13,6 +13,19 @@ app.controller('StartPageController', function($scope, $location, $rootScope, da
         dataAccess.getTrainData(trainingId, $scope.exerciseInformationLoaded);
     };
 
+    $scope.formatSets = function(sets){
+        var result = sets.reduce(function(str, currentSet) {  
+            if(currentSet.value){
+                return str + currentSet.value + 'x' +currentSet.repetitions + ','; 
+            }else{
+                return str + currentSet.repetitions + ','; 
+            }
+            
+        }, 0);
+        result = result.slice(0,result.length-1);
+        return result;
+    };
+
     dataAccess.getLastTrainingId($scope.lastTrainingIdLoaded);
 
     function guid() {

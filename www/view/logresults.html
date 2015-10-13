@@ -8,27 +8,32 @@
 	</button>
     <div class="list-group">
 		  <a href data-target="#addExerciseRepetitionModal" data-toggle="modal" class="list-group-item list-group-item-success">
-			<div class="repetition-item">
-				<div class="repetition-item-left">
+			<div class="clearfix">
+				<div class="left w-20">
 					<span class="repetition-icon">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</span>
 				</div>
-				<div class="repetition-item-body">
+				<div class="left w-70">
 					<h4>Log repetition!</h4>
 				</div>
 			</div>
 		  </a>
 		  <a href ng-click="doExercise(exercise.id)" class="list-group-item" ng-repeat="repetition in repetitionList">
-			<div class="repetition-item">
-				<div class="repetition-item-left">
+			<div class="clearfix item50">
+				<div class="left w-20">
 					<span class="repetition-icon">
 						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 					</span>
 				</div>
-				<div class="repetition-item-body">
+				<div class="left w-70">
 					<h4 class="list-group-item-heading">#{{repetition.id}}</h4>
 					<p class="list-group-item-text">{{repetition.weight}} - {{repetition.repetitions}}</p>
+				</div>
+				<div class="left w-10 pT10">
+					<button id="removeItem" type="button" class="btn" ng-click="removeItem(repetition.id)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
 				</div>
 			</div>
 		  </a>

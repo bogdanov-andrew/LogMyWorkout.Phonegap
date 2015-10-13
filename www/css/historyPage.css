@@ -21,13 +21,11 @@
     font-size: 12pt;
     text-transform: capitalize;
 }
+
 .history-item {
 	margin: 0px;
 }
-.history-item2 {
-	margin: 0px;
-	height: 100%;
-}
+
 .history-exercise-item {
     padding: 5px;
 }
@@ -37,7 +35,4 @@
 	padding-right: 15px;
 	height: 100%;
 	overflow: auto;
-}
-.history-container{
-    height: 100%;
 }

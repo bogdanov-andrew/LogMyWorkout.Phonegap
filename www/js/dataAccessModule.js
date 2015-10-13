@@ -255,6 +255,12 @@ angular.module('dataAccessModule',[ ])
             db.transaction(function(tx){
                 tx.executeSql("INSERT INTO Sets (exerciseGroupId, value, repetitions) VALUES (?,?,?)", [data.exerciseGroupId, data.value, data.repetitions]);
             });
+        },
+
+        deleteRepetition: function(setId){
+            db.transaction(function(tx){
+                tx.executeSql("DELETE FROM Sets WHERE setId = ?", [setId]);
+            });
         }
     })
     .run(function(){

@@ -54,3 +54,89 @@
     font-size: 30px; /* ������ ������ � ��������� */
 	padding-bottom: 10px;	
 }
+
+/* blocks */
+
+.clearfix{
+	display: block;
+}
+
+.left{
+	float: left;
+}
+
+/* width */
+
+.w-10{
+	width: 10%;
+}
+
+.w-20{
+	width: 20%;
+}
+
+.w-30{
+	width: 30%;
+}
+
+.w-40{
+	width: 40%;
+}
+
+.w-50{
+	width: 50%;
+}
+
+.w-60{
+	width: 60%;
+}
+
+.w-70{
+	width: 70%;
+}
+
+.w-80{
+	width: 80%;
+}
+
+.w-90{
+	width: 90%;
+}
+
+.w-full{
+	width: 100%;
+}
+
+/* padding top */
+
+.pT10{
+	padding-top: 10px;
+}
+
+.pT20{
+	padding-top: 20px;
+}
+
+.pT30{
+	padding-top: 30px;
+}
+
+/* padding left */
+
+.pL10{
+	padding-left: 10px;
+}
+
+.pL20{
+	padding-left: 20px;
+}
+
+.pL30{
+	padding-left: 30px;
+}
+
+
+.v-align-middle{
+	vertical-align: middle;
+}
+

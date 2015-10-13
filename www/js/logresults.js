@@ -27,6 +27,11 @@ app.controller('LogResultsPageController', function($interval, $location, $scope
         navigationService.navigateToWorkout();
     };
 
+    $scope.removeItem = function(id){
+ 		dataAccess.deleteRepetition(id);
+        $scope.loadRepeptitions();
+    };
+
 	$scope.logRepetition = function(){
         var weight = $('#repetition-weight').val();
         var count = $('#repetition-count').val();
